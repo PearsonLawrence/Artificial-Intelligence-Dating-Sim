@@ -6,7 +6,7 @@ public class CharacterAttributes
 {
     public int aggression;
     public int charisma;
-    public int familiarity;
+    public int popularity;
 }
 
 [System.Serializable]
