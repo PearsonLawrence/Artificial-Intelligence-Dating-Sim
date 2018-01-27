@@ -34,7 +34,7 @@ public class StudentAI : MonoBehaviour {
     public SocialIntent CurrentIntent;
     public bool WorkTime;
 
-
+    public IdleThoughtSystem thought;
     public Vector3 RandomNavmeshLocation(float radius)
     {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
@@ -59,6 +59,7 @@ public class StudentAI : MonoBehaviour {
         Agent = GetComponent<NavMeshAgent>();
         School = GameObject.FindObjectOfType<SchoolManager>();
         CurrentState = States.Roam;
+        thought = GetComponent<IdleThoughtSystem>();
     }
 
     public float ChillTime;
@@ -69,11 +70,18 @@ public class StudentAI : MonoBehaviour {
             CurrentState = States.Chill;
             NewDestination();
             ChillTime = Random.Range(0, 10);
+
+            int temp = Random.Range(0, 100);
+            bool think = (temp > 75) ? true : false;
+            if(think)
+            {
+                thought.IdleGrow = true;
+            }
         }
 
 
     }
-
+    
     public StudentAI FindClosetSocialStudent()
     {
         StudentAI CloseSocial = null;
@@ -89,7 +97,7 @@ public class StudentAI : MonoBehaviour {
         }
         return CloseSocial;
     }
-
+    
     public bool ChatEngaged = false;
 
     public void DoChill()
@@ -98,12 +106,13 @@ public class StudentAI : MonoBehaviour {
         if(ChatEngaged)
         {
             CurrentState = States.Socialize;
+            thought.IdleGrow = false;
         }
 
         if(ChillTime <= 0)
         {
-            //SocialTarget = FindClosetSocialStudent();
             Agent.SetDestination(SocialTarget.transform.position);
+            thought.IdleGrow = false;
             CurrentState = States.Roam;
             ChatCooldown = 5;
             //SocialTarget = null;

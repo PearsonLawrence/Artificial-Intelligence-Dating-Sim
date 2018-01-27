@@ -4,8 +4,21 @@ timeCreated: 18446744011573954816
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
+    100000: parkchair_D2
+    100002: //RootNode
+    400000: parkchair_D2
+    400002: //RootNode
+    2300000: parkchair_D2
+    3300000: parkchair_D2
     4300000: parkchair_D2
-  externalObjects: {}
+    7400000: Default Take
+    11100000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: parkchair__AO_tga
+    second: {fileID: 2100000, guid: c1393af70e0d1a746956ed2b89716344, type: 2}
   materials:
     importMaterials: 1
     materialName: 3
