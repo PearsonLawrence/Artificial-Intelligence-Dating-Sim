@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Kernal : MonoBehaviour
 {
-	public PersonStore people = new PersonStore();
+	public PersonStore store = new PersonStore();
 
 	public static Kernal instance;
 
