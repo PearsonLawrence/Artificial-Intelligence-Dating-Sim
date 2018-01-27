@@ -27,15 +27,8 @@ public class StudentAI : MonoBehaviour {
 
     public SchoolManager School;
 
-    [System.Serializable]
-    public class Traits
-    {
-        public bool Introvert;
 
-        public int BloodType; // 0 = NA, 1 = A, 2 = B, 3 = O
-    }
-
-    public Traits traits;
+    public StudentAI SocialTarget;
 
     public States CurrentState;
     public SocialIntent CurrentIntent;
@@ -75,7 +68,7 @@ public class StudentAI : MonoBehaviour {
         {
             CurrentState = States.Chill;
             NewDestination();
-            ChillTime = Random.Range(0, 20);
+            ChillTime = Random.Range(0, 10);
         }
 
 
@@ -83,7 +76,7 @@ public class StudentAI : MonoBehaviour {
 
     public StudentAI FindClosetSocialStudent()
     {
-        StudentAI CloseSocial = new StudentAI();
+        StudentAI CloseSocial = null;
         float Dist = 1000;
         for (int i = 0; i < School.Students.Length; i++)
         {
@@ -109,13 +102,33 @@ public class StudentAI : MonoBehaviour {
 
         if(ChillTime <= 0)
         {
-            Agent.SetDestination(FindClosetSocialStudent().transform.position);
+            //SocialTarget = FindClosetSocialStudent();
+            //Agent.SetDestination(SocialTarget.transform.position);
             CurrentState = States.Roam;
+            ChatCooldown = 5;
+            SocialTarget = null;
         }
     }
+
+    float tempTime;
     public void DoSocial()
     {
-        
+        Agent.SetDestination(SocialTarget.transform.position);
+
+        if (ChatEngaged == false && Agent.remainingDistance < 5)
+        {
+            ChatEngaged = true;
+        }
+        else if(ChatEngaged == true)
+        {
+            tempTime -= Time.deltaTime;
+        }
+       
+
+        if(tempTime <= 0)
+        {
+            CurrentState = States.Roam;
+        }
     }
 
    
@@ -136,10 +149,15 @@ public class StudentAI : MonoBehaviour {
                 break;
         }
 
-      
+        if(ChatEngaged == true && CurrentState != States.Socialize && ChatCooldown <= 0)
+        {
+            CurrentState = States.Socialize;
+        }
 
-        
+        ChatCooldown -= Time.deltaTime;
     }
+
+    public float ChatCooldown;
 }
 
 
