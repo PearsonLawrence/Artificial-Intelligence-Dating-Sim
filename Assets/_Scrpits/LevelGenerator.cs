@@ -48,7 +48,7 @@ public class LevelGenerator : MonoBehaviour {
                     numSpawned++;
                     Person TempPerson = new Person();
 
-                    kernal.people.people.Add(TempPerson);
+                    kernal.store.people.Add(TempPerson);
 
                 }
                 if (i < Manager.FemaleSpawn)
@@ -60,7 +60,7 @@ public class LevelGenerator : MonoBehaviour {
 
                     Person TempPerson = new Person();
 
-                    kernal.people.people.Add(TempPerson);
+                    kernal.store.people.Add(TempPerson);
                 }
 
                 
