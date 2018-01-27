@@ -19,10 +19,14 @@ public class PopularityBubble : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         StudentAI Temp = other.GetComponent<StudentAI>();
-        if (Temp != null && Temp != Owner && Temp.ChatEngaged == false && Temp.ChatCooldown <= 0)
+        if (Temp != null && Temp != Owner && Temp.ChatCooldown <= 0)
         {
             Owner.SocialTarget = Temp;
+            Temp.SocialTarget = Owner;
             Owner.ChatEngaged = true;
+            Temp.ChatEngaged = true;
+
+            Debug.Log("dido");
         }
     }
 

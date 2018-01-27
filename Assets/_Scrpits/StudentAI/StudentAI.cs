@@ -111,10 +111,10 @@ public class StudentAI : MonoBehaviour {
 
         if(ChillTime <= 0)
         {
-            Agent.SetDestination(SocialTarget.transform.position);
+            //if(SocialTarget == null) { return; }
+            //Agent.SetDestination(SocialTarget.transform.position);
             thought.IdleGrow = false;
             CurrentState = States.Roam;
-            ChatCooldown = 5;
             //SocialTarget = null;
         }
     }
@@ -123,27 +123,27 @@ public class StudentAI : MonoBehaviour {
     {
         Agent.SetDestination(SocialTarget.transform.position);
 
-        if (ChatEngaged == false && Agent.remainingDistance < 5)
+        if (Agent.remainingDistance < 5)
         {
-            ChatEngaged = true;
-
             PersonTag targetTag = SocialTarget.gameObject.GetComponent<PersonTag>();
             PersonTag tag = GetComponent<PersonTag>();
-
-
+            Agent.SetDestination(SocialTarget.transform.position);
 
             //Do conversation here!!!!
             PairWiseInteraction(tag, targetTag);
+            CurrentState = States.Roam;
+            ChatCooldown = 5;
+            //Debug.Log("fuck has occurred");
         }
         else if(ChatEngaged == true)
         {
-         
+            
         }
 
-      
+        ChatEngaged = false;
     }
 
-    public void PairWiseInteraction(PersonTag initiator, PersonTag reciever)
+    public bool PairWiseInteraction(PersonTag initiator, PersonTag reciever)
     {
         Person sPerson = Kernal.instance.store.people[initiator.storeID];
         Person rPerson = Kernal.instance.store.people[reciever.storeID];
@@ -155,10 +155,11 @@ public class StudentAI : MonoBehaviour {
         int multi = (roll < chance) ? 1 : -1;
 
         // initiator record
-        SocialRecord record = Kernal.instance.store.socialRecords[initiator.storeID][reciever.storeID];
-        if(record == null)
+        bool hasKey = Kernal.instance.store.socialRecords[initiator.storeID].ContainsKey(reciever.storeID);
+        SocialRecord record = null;
+        if(!hasKey)
         {
-            record = new SocialRecord();
+            Kernal.instance.store.socialRecords[initiator.storeID][reciever.storeID] = new SocialRecord();
         }
         record = Kernal.instance.store.socialRecords[initiator.storeID][reciever.storeID];
 
@@ -167,11 +168,15 @@ public class StudentAI : MonoBehaviour {
         record.trust       += multi * 5 * sPerson.attributes.popularity;
         record.eros        += multi * 5 * sPerson.attributes.charisma;
 
+        //Debug.Log(string.Format("{0}, {1}, {2}", record.familiarity, record.trust, record.eros));
+        //Debug.Log(record.desire);
+
+
         // reciever record
-        record = Kernal.instance.store.socialRecords[reciever.storeID][initiator.storeID];
-        if(record == null)
+        hasKey = Kernal.instance.store.socialRecords[reciever.storeID].ContainsKey(initiator.storeID);
+        if(!hasKey)
         {
-            record = new SocialRecord();
+            Kernal.instance.store.socialRecords[reciever.storeID][initiator.storeID] = new SocialRecord();
         }
         record = Kernal.instance.store.socialRecords[reciever.storeID][initiator.storeID];
 
@@ -179,6 +184,11 @@ public class StudentAI : MonoBehaviour {
         record.familiarity += multi * 5 * rPerson.attributes.aggression;
         record.trust       += multi * 5 * rPerson.attributes.popularity;
         record.eros        += multi * 5 * rPerson.attributes.charisma;
+
+        //Debug.Log(string.Format("{0}, {1}, {2}", record.familiarity, record.trust, record.eros));
+        //Debug.Log(record.desire);
+
+        return roll < chance;
     }
 
    
@@ -205,6 +215,7 @@ public class StudentAI : MonoBehaviour {
         }
 
         ChatCooldown -= Time.deltaTime;
+
     }
 
     public float ChatCooldown;

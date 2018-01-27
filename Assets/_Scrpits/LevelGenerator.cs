@@ -44,14 +44,29 @@ public class LevelGenerator : MonoBehaviour {
             temp.attributes.popularity = Random.RandomRange(0, 5);
 
             kernal.store.people.Add(temp);
+            kernal.store.socialRecords.Add(new Dictionary<int, SocialRecord>());
         }
+    }
+
+    int numSpawned = 0;
+    GameObject SpawnPerson(GameObject prefab, Vector3 spawnLocation, Quaternion spawnRotation)
+    {
+        GameObject temp = Instantiate(prefab, RandomNavmeshLocation(12), Quaternion.identity);
+        temp.GetComponent<PersonTag>().storeID = numSpawned;
+        numSpawned++;
+        Person TempPerson = new Person();
+
+        kernal.store.people.Add(TempPerson);
+        kernal.store.socialRecords.Add(new Dictionary<int, SocialRecord>());
+
+        return temp;
     }
 
     // Update is called once per frame
     void Update () {
 		if(spawn)
         {
-            int numSpawned = 0;
+            
 
             int Majority = (Manager.MaleSpawn > Manager.FemaleSpawn) ? Manager.MaleSpawn : Manager.FemaleSpawn;
 
@@ -59,28 +74,12 @@ public class LevelGenerator : MonoBehaviour {
             {
                 if (i < Manager.MaleSpawn)
                 {
-                    GameObject temp = Instantiate(MalePrefab, RandomNavmeshLocation(12), Quaternion.identity);
-
-                    temp.GetComponent<PersonTag>().storeID = numSpawned;
-                    numSpawned++;
-                    Person TempPerson = new Person();
-
-                    kernal.store.people.Add(TempPerson);
-
+                    SpawnPerson(MalePrefab, RandomNavmeshLocation(12), Quaternion.identity);
                 }
                 if (i < Manager.FemaleSpawn)
                 {
-                    GameObject temp = Instantiate(FemalePrefab, RandomNavmeshLocation(12), Quaternion.identity);
-
-                    temp.GetComponent<PersonTag>().storeID = numSpawned;
-                    numSpawned++;
-
-                    Person TempPerson = new Person();
-
-                    kernal.store.people.Add(TempPerson);
+                    SpawnPerson(FemalePrefab, RandomNavmeshLocation(12), Quaternion.identity);
                 }
-
-                
             }
             spawn = false;
         }
