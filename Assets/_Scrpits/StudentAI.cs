@@ -8,18 +8,24 @@ public class StudentAI : MonoBehaviour {
     public enum States
     {
         Roam,
-        Work,
-        Home
+        Chill,
+        Socialize
 
     }
+    public enum SocialIntent
+    {
+        Friendly,
+        Romantic,
+        Hostile
 
+    }
     public Sprite sprite;
     private Rigidbody RB;
     private NavMeshAgent Agent;
 
     public Vector3 Target;
 
-   
+    public SchoolManager School;
 
     [System.Serializable]
     public class Traits
@@ -32,7 +38,8 @@ public class StudentAI : MonoBehaviour {
     public Traits traits;
 
     public States CurrentState;
-
+    public SocialIntent CurrentIntent;
+    public bool WorkTime;
 
 
     public Vector3 RandomNavmeshLocation(float radius)
@@ -50,33 +57,68 @@ public class StudentAI : MonoBehaviour {
 
     void NewDestination()
     {
-        Agent.SetDestination(RandomNavmeshLocation(1000));
+        Agent.SetDestination(RandomNavmeshLocation(10));
     }
     // Use this for initialization
     void Start()
     {
         RB = GetComponent<Rigidbody>();
         Agent = GetComponent<NavMeshAgent>();
+        School = GameObject.FindObjectOfType<SchoolManager>();
         CurrentState = States.Roam;
     }
 
-
+    public float ChillTime;
     public void DoRoam()
     {
-        if (Agent.remainingDistance <= 5) { NewDestination(); }
+        if (Agent.remainingDistance <= 10)
+        {
+            CurrentState = States.Chill;
+            NewDestination();
+            ChillTime = Random.Range(0, 20);
+        }
 
 
     }
-    public void DoWork()
+
+    public StudentAI FindClosetSocialStudent()
     {
+        StudentAI CloseSocial = new StudentAI();
+        float Dist = 1000;
+        for (int i = 0; i < School.Students.Length; i++)
+        {
+            float newDist = Vector3.Distance(transform.position, School.Students[i].transform.position);
+            if (newDist < Dist && School.Students[i] != this)
+            {
+                Dist = newDist;
+                CloseSocial = School.Students[i];
+            }
+        }
+        return CloseSocial;
     }
-    public void DoHome()
+
+    public bool ChatEngaged = false;
+
+    public void DoChill()
     {
+        ChillTime -= Time.deltaTime;
+        if(ChatEngaged)
+        {
+            CurrentState = States.Socialize;
+        }
 
+        if(ChillTime <= 0)
+        {
+            Agent.SetDestination(FindClosetSocialStudent().transform.position);
+            CurrentState = States.Roam;
+        }
+    }
+    public void DoSocial()
+    {
+        
     }
 
-    public bool WorkTime;
-
+   
     // Update is called once per frame
     void Update()
     {
@@ -86,18 +128,15 @@ public class StudentAI : MonoBehaviour {
             case States.Roam:
                 DoRoam();
                 break;
-            case States.Work:
-                DoWork();
+            case States.Chill:
+                DoChill();
                 break;
-            case States.Home:
-                DoHome();
+            case States.Socialize:
+                DoSocial();
                 break;
         }
 
-        if (WorkTime && CurrentState != States.Work)
-        {
-            CurrentState = States.Work;
-        }
+      
 
         
     }
