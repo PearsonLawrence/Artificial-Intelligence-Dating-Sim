@@ -9,10 +9,12 @@ public class LevelGenerator : MonoBehaviour {
     public bool spawn = true;
 
     public GameObject MalePrefab, FemalePrefab;
-	// Use this for initialization
-	void Start ()
+
+    public Kernal kernal;
+    // Use this for initialization
+    void Start ()
     {
-		
+        kernal = GameObject.FindObjectOfType<Kernal>();
        
     }
 
@@ -32,13 +34,36 @@ public class LevelGenerator : MonoBehaviour {
     void Update () {
 		if(spawn)
         {
-            for (int i = 0; i < Manager.MaleSpawn; i++)
+            int numSpawned = 0;
+
+            int Majority = (Manager.MaleSpawn > Manager.FemaleSpawn) ? Manager.MaleSpawn : Manager.FemaleSpawn;
+
+            for (int i = 0; i < Majority; i++)
             {
-                Instantiate(MalePrefab, RandomNavmeshLocation(12), Quaternion.identity);
-            }
-            for (int i = 0; i < Manager.FemaleSpawn; i++)
-            {
-                Instantiate(FemalePrefab, RandomNavmeshLocation(12), Quaternion.identity);
+                if (i < Manager.MaleSpawn)
+                {
+                    GameObject temp = Instantiate(MalePrefab, RandomNavmeshLocation(12), Quaternion.identity);
+
+                    temp.GetComponent<PersonTag>().storeID = numSpawned;
+                    numSpawned++;
+                    Person TempPerson = new Person();
+
+                    kernal.people.people.Add(TempPerson);
+
+                }
+                if (i < Manager.FemaleSpawn)
+                {
+                    GameObject temp = Instantiate(FemalePrefab, RandomNavmeshLocation(12), Quaternion.identity);
+
+                    temp.GetComponent<PersonTag>().storeID = numSpawned;
+                    numSpawned++;
+
+                    Person TempPerson = new Person();
+
+                    kernal.people.people.Add(TempPerson);
+                }
+
+                
             }
             spawn = false;
         }
