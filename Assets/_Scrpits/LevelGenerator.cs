@@ -15,7 +15,7 @@ public class LevelGenerator : MonoBehaviour {
     void Start ()
     {
         kernal = GameObject.FindObjectOfType<Kernal>();
-       
+       GatherPreplacedCharacters();
     }
 
     public Vector3 RandomNavmeshLocation(float radius)
@@ -30,6 +30,23 @@ public class LevelGenerator : MonoBehaviour {
         }
         return finalPosition;
     }
+
+    void GatherPreplacedCharacters()
+    {
+        var characters = GameObject.FindObjectsOfType(typeof(PersonTag));
+
+        for(int i = 0; i < characters.Length; ++i)
+        {
+            PersonTag tag = (characters[i] as PersonTag);
+            Person temp = new Person();
+            temp.attributes.aggression = Random.RandomRange(0, 5);
+            temp.attributes.charisma = Random.RandomRange(0, 5);
+            temp.attributes.popularity = Random.RandomRange(0, 5);
+
+            kernal.store.people.Add(temp);
+        }
+    }
+
     // Update is called once per frame
     void Update () {
 		if(spawn)
@@ -48,7 +65,7 @@ public class LevelGenerator : MonoBehaviour {
                     numSpawned++;
                     Person TempPerson = new Person();
 
-                    kernal.people.people.Add(TempPerson);
+                    kernal.store.people.Add(TempPerson);
 
                 }
                 if (i < Manager.FemaleSpawn)
@@ -60,7 +77,7 @@ public class LevelGenerator : MonoBehaviour {
 
                     Person TempPerson = new Person();
 
-                    kernal.people.people.Add(TempPerson);
+                    kernal.store.people.Add(TempPerson);
                 }
 
                 

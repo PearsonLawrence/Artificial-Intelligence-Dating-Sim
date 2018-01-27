@@ -103,14 +103,13 @@ public class StudentAI : MonoBehaviour {
         if(ChillTime <= 0)
         {
             //SocialTarget = FindClosetSocialStudent();
-            //Agent.SetDestination(SocialTarget.transform.position);
+            Agent.SetDestination(SocialTarget.transform.position);
             CurrentState = States.Roam;
             ChatCooldown = 5;
-            SocialTarget = null;
+            //SocialTarget = null;
         }
     }
 
-    float tempTime;
     public void DoSocial()
     {
         Agent.SetDestination(SocialTarget.transform.position);
@@ -118,17 +117,59 @@ public class StudentAI : MonoBehaviour {
         if (ChatEngaged == false && Agent.remainingDistance < 5)
         {
             ChatEngaged = true;
+
+            PersonTag targetTag = SocialTarget.gameObject.GetComponent<PersonTag>();
+            PersonTag tag = GetComponent<PersonTag>();
+
+
+
+            //Do conversation here!!!!
+            PairWiseInteraction(tag, targetTag);
         }
         else if(ChatEngaged == true)
         {
-            tempTime -= Time.deltaTime;
+         
         }
-       
 
-        if(tempTime <= 0)
+      
+    }
+
+    public void PairWiseInteraction(PersonTag initiator, PersonTag reciever)
+    {
+        Person sPerson = Kernal.instance.store.people[initiator.storeID];
+        Person rPerson = Kernal.instance.store.people[reciever.storeID];
+
+        int chance = (sPerson.attributes.engagement + rPerson.attributes.engagement) / 2;
+        int roll = Random.Range(0, 10);
+
+        // true if positive, false if negative
+        int multi = (roll < chance) ? 1 : -1;
+
+        // initiator record
+        SocialRecord record = Kernal.instance.store.socialRecords[initiator.storeID][reciever.storeID];
+        if(record == null)
         {
-            CurrentState = States.Roam;
+            record = new SocialRecord();
         }
+        record = Kernal.instance.store.socialRecords[initiator.storeID][reciever.storeID];
+
+        // apply
+        record.familiarity += multi * 5 * sPerson.attributes.aggression;
+        record.trust       += multi * 5 * sPerson.attributes.popularity;
+        record.eros        += multi * 5 * sPerson.attributes.charisma;
+
+        // reciever record
+        record = Kernal.instance.store.socialRecords[reciever.storeID][initiator.storeID];
+        if(record == null)
+        {
+            record = new SocialRecord();
+        }
+        record = Kernal.instance.store.socialRecords[reciever.storeID][initiator.storeID];
+
+        // apply
+        record.familiarity += multi * 5 * rPerson.attributes.aggression;
+        record.trust       += multi * 5 * rPerson.attributes.popularity;
+        record.eros        += multi * 5 * rPerson.attributes.charisma;
     }
 
    

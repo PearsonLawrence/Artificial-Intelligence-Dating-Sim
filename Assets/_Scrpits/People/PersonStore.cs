@@ -7,6 +7,14 @@ public class CharacterAttributes
     public int aggression;
     public int charisma;
     public int popularity;
+
+    public int engagement
+    {
+        get
+        {
+            return aggression + charisma + popularity;
+        }
+    }
 }
 
 [System.Serializable]
@@ -25,70 +33,21 @@ public class SocialRecord
 [System.Serializable]
 public class Person
 {
-    [SerializeField]
-    private CharacterAttributes _attributes;
-    public CharacterAttributes attributes
-    {
-        get
-        {
-            return _attributes;
-        }
-        private set
-        {
-            attributes = value;
-        }
-    }
-
-    [SerializeField]
-    private SocialRecord _social;
-    public SocialRecord social
-    {
-        get
-        {
-            return _social;
-        }
-        private set
-        {
-            _social = value;
-        }
-    }
+    public CharacterAttributes attributes = new CharacterAttributes();
 }
 
 [System.Serializable]
 public class PersonStore
 {
     // Lookup table for people by ID (e.g. index)
-    [SerializeField]
-    private List<Person> _people;
-    public List<Person> people
-    {
-        get
-        {
-            return _people;
-        }
-        private set
-        {
-            _people = value;
-        }
-    }
+    public List<Person> people;
 
     // Lookup table for relationships by POV ID and TARGET ID
-    public List<Dictionary<int,SocialRecord>> _socialRecords;
-    public List<Dictionary<int,SocialRecord>> socialRecords
-    {
-        get
-        {
-            return _socialRecords;
-        }
-        set
-        {
-            _socialRecords = value;
-        }
-    }
+    public List<Dictionary<int,SocialRecord>> socialRecords;
 
     public PersonStore()
     {
-        _people = new List<Person>();
-        _socialRecords = new List<Dictionary<int,SocialRecord>>();
+        people = new List<Person>();
+        socialRecords = new List<Dictionary<int,SocialRecord>>();
     }
 }
