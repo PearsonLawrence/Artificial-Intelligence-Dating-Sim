@@ -43,7 +43,17 @@ public class CompareHUDController : MonoBehaviour
 		// can we calc sliders?
 		if(isReadyToCompare)
 			PopulateDesireSliders();
-	}
+
+		// can we assign focus?
+		Kernal.instance.focusedIndividuals.Clear();
+		foreach(var foc in thingsToCompare)
+		{
+			if(foc != null)
+			{
+				Kernal.instance.focusedIndividuals.Add(Kernal.instance.store.people[foc.id]);
+			}
+		}
+}
 
 	public void RemovePerson(int index)
 	{

@@ -202,6 +202,15 @@ public class StudentAI : MonoBehaviour {
                 temp.One = this.gameObject;
                 temp.Two = SocialTarget.gameObject;
 
+                if(Kernal.instance.focusedIndividuals.Contains(Kernal.instance.store.people[temp.One.GetComponent<PersonTag>().storeID]) ||
+                   Kernal.instance.focusedIndividuals.Contains(Kernal.instance.store.people[temp.Two.GetComponent<PersonTag>().storeID]))
+                {
+                       if(result)
+                       Kernal.instance.PlayPositiveConversationNoise();
+                       else
+                        Kernal.instance.PlayNegativeConversationNoise();
+                }
+
                 Destroy(NewConvo, ChatLength);
             }
 

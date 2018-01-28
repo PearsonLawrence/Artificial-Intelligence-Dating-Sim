@@ -19,6 +19,8 @@ public class Picker : MonoBehaviour
 
 	public GameObjectEvent OnObjectPicked;
 
+	public AudioSource ass { get { return Kernal.instance.ass;}}
+
 	Vector2 cursorPositionScreenSpace
 	{
 		get
@@ -50,6 +52,21 @@ public class Picker : MonoBehaviour
 				if(OnObjectPicked != null)
 				{
 					OnObjectPicked.Invoke(pickedObject);
+
+					// try civvie noise
+					PersonTag tagged = pickedObject.GetComponent<PersonTag>();
+					switch(Kernal.instance.store.people[tagged.storeID].gender)
+					{
+						case Gender.Male:
+							ass.PlayOneShot(Kernal.instance.maleSounds[Random.Range(0, Kernal.instance.maleSounds.Length)]);
+							break;
+						case Gender.Female:
+							ass.PlayOneShot(Kernal.instance.femaleSounds[Random.Range(0, Kernal.instance.maleSounds.Length)]);
+							break;
+						default:
+							ass.PlayOneShot(Kernal.instance.femaleSounds[Random.Range(0, Kernal.instance.femaleSounds.Length)]);
+							break;
+					}
 				}
 			}
 		}

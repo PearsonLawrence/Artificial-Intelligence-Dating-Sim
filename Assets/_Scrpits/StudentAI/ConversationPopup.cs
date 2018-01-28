@@ -7,10 +7,10 @@ public class ConversationPopup : MonoBehaviour {
     public Image[] Emotions;
     public int Feeling;
     public GameObject One, Two;
-	// Use this for initialization
-	void Start () {
 
-       
+	// Use this for initialization
+	void Start ()
+    {
 
 	}
 	

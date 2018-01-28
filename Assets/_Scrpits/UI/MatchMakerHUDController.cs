@@ -120,6 +120,10 @@ public class MatchMakerHUDController : MonoBehaviour
 		{
 			_pickedPersonID = _picker.pickedObject.GetComponent<PersonTag>().storeID;
 			_pickedPerson = Kernal.instance.store.people[_pickedPersonID];
+
+			Kernal.instance.focusedIndividuals.Clear();
+			Kernal.instance.focusedIndividuals.Add(_pickedPerson);
+
 			UpdateIDCard(); // need to switch to event based later
 		}
 

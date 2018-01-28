@@ -4812,6 +4812,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 700698274}
+        m_MethodName: ClearFocus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &456507818
@@ -11358,6 +11369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 700698275}
   - component: {fileID: 700698274}
+  - component: {fileID: 700698276}
   m_Layer: 0
   m_Name: _KERNAL
   m_TagString: Untagged
@@ -11376,8 +11388,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750113f7444d61a49a67f1e21b2d449c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  focusedIndividuals: []
   store:
     people: []
+  ass: {fileID: 700698276}
+  maleSounds:
+  - {fileID: 8300000, guid: c3dba5c40876ff04eb46ebb95ae13f19, type: 3}
+  - {fileID: 8300000, guid: d82c1f669c4014f4db4737eae6b41907, type: 3}
+  - {fileID: 8300000, guid: 230a6115e019db242b02db0ea2e5519b, type: 3}
+  - {fileID: 8300000, guid: e6a7e01567d12df4ea00f3a8bf62ab18, type: 3}
+  - {fileID: 8300000, guid: 060dd1f46349fa547aa2e17d2941ef1f, type: 3}
+  femaleSounds:
+  - {fileID: 8300000, guid: 803a0710ba9f11d42afe1b4c377b3e77, type: 3}
+  - {fileID: 8300000, guid: 7130d8e2f9e1798489313328804d5156, type: 3}
+  - {fileID: 8300000, guid: d56c31a1c17cc1041bbf30d65e019afe, type: 3}
+  - {fileID: 8300000, guid: 1a51534162c17cc4c992ea739902908b, type: 3}
+  - {fileID: 8300000, guid: c9c44fbdca7c64f41b5f1cfa460d6b5e, type: 3}
+  - {fileID: 8300000, guid: 602e8e596440b934e9ffdb5587d43559, type: 3}
+  - {fileID: 8300000, guid: 695dd61b0db03d14388ec0cbb9998811, type: 3}
+  - {fileID: 8300000, guid: 715a23c9b364b434a9879572f1d80b5c, type: 3}
+  - {fileID: 8300000, guid: eecb1768875ac964aba45a31ec4f189f, type: 3}
+  - {fileID: 8300000, guid: d91ff852f1c1b2544975dd6ed83c4ff3, type: 3}
+  - {fileID: 8300000, guid: 93825fefae929fd4480dc4b48b26504d, type: 3}
+  - {fileID: 8300000, guid: be28eb773f196ce40a063ff70cfc3223, type: 3}
+  - {fileID: 8300000, guid: 16872d7f022e22842b52d5f29572862c, type: 3}
+  - {fileID: 8300000, guid: 8b96df359d34db248860785dd33547b2, type: 3}
+  - {fileID: 8300000, guid: 027d78268af88ec45a9a85b91a8dfe19, type: 3}
+  - {fileID: 8300000, guid: aa5be64e84935ab45b10af397f29539e, type: 3}
+  - {fileID: 8300000, guid: a02688893d944c14f9be057ef6f8bd88, type: 3}
+  - {fileID: 8300000, guid: 895ebc1be6c81824389cea3b3d70319d, type: 3}
+  - {fileID: 8300000, guid: 811308270bca655418b232bcf570b6c7, type: 3}
+  - {fileID: 8300000, guid: 67946080ecf89e3408f82b4acc2e86e9, type: 3}
+  - {fileID: 8300000, guid: c762eef053b18cc48a385c1a7bbcdfe6, type: 3}
+  - {fileID: 8300000, guid: e4fb0052ca3faee4fb590778917aad41, type: 3}
+  - {fileID: 8300000, guid: 9ff1c69c086f4084e8244137729219ce, type: 3}
+  - {fileID: 8300000, guid: 5598f776e68f4a84793a3fd20941a0c3, type: 3}
+  - {fileID: 8300000, guid: cc16159fdd3f01147be30d242d075cd6, type: 3}
+  - {fileID: 8300000, guid: fbd001d84bb91a14d83a9ea39e9f538e, type: 3}
+  happyNoise: {fileID: 8300000, guid: 64d25e5208ad3e64da6cebd59f310b50, type: 3}
+  sadNoise: {fileID: 8300000, guid: 284451f19bc3b5a44b66636c05df4c56, type: 3}
 --- !u!4 &700698275
 Transform:
   m_ObjectHideFlags: 0
@@ -11391,6 +11440,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &700698276
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 700698273}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &713904376
 GameObject:
   m_ObjectHideFlags: 0
@@ -21640,6 +21769,17 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 700698274}
+        m_MethodName: ClearFocus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -34654,6 +34794,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 700698274}
+        m_MethodName: ClearFocus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1991444158
@@ -36257,6 +36408,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Menu
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 700698274}
+        m_MethodName: ClearFocus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
