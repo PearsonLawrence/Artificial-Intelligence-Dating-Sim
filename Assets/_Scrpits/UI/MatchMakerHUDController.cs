@@ -16,7 +16,11 @@ public class MatchMakerHUDController : MonoBehaviour
 			return _picker.pickedObject != null;
 		}
 	}
+	private Person _previousPickedObject;
+
 	private Person _pickedPerson;
+
+	
 
 	[SerializeField]
 	private GameObject _inspectorPanel;
@@ -44,7 +48,7 @@ public class MatchMakerHUDController : MonoBehaviour
 	private void Update()
 	{
 		bool pickerIsFocused = _pickerFocused;
-		bool pickerHasChanged = pickerWasFocused != pickerIsFocused;
+		bool pickerHasChanged = (pickerWasFocused != pickerIsFocused);
 
 		_inspectorPanel.SetActive(pickerIsFocused);
 

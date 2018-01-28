@@ -47,7 +47,6 @@ public class LevelGenerator : MonoBehaviour {
 
             Gender finalGender = Random.Range(0,2) == 1 ? Gender.Female : Gender.Male;
 
-
             temp.name = FamilyNames[Random.Range(0, FamilyNames.Count)];
             temp.name += " " + (finalGender == Gender.Male ? MaleNames[Random.Range(0, MaleNames.Count)] :
                                                              FemaleNames[Random.Range(0, FemaleNames.Count)]);

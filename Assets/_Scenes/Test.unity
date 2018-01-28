@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -430,6 +430,69 @@ MonoBehaviour:
   FemalePrefab: {fileID: 1561074188502874, guid: 4f81d487a4e980d45b99b34893db6ef9,
     type: 2}
   kernal: {fileID: 700698274}
+  MaleNames:
+  - Haruto
+  - Yuki
+  - Hayato
+  - Sosuke
+  - Kota
+  - Yusei
+  - Yuito
+  - Eita
+  - Daiki
+  - Toma
+  - Manato
+  - Takeru
+  - Ryuki
+  - Ryo
+  - Rento
+  - Soma
+  - Kosei
+  - Riku
+  - Ryota
+  - Hiroki
+  FemaleNames:
+  - Mikuru
+  - Pearson
+  - Hana
+  - Yui
+  - Rio
+  - Mei
+  - Mio
+  - Rin
+  - Haruka
+  - Yume
+  - Airi
+  - Megumi
+  - Ayaka
+  - Ayase
+  - Ria
+  - Rina
+  - Sana
+  - Ruka
+  - Karin
+  - Risa
+  FamilyNames:
+  - Sato
+  - Suzuki
+  - Takahashi
+  - Ito
+  - Yamamoto
+  - Nakamura
+  - Kobayashi
+  - Kato
+  - Yoshida
+  - Hoshido
+  - Saito
+  - Matsumoto
+  - Ikeda
+  - Goto
+  - Ishii
+  - Kondo
+  - Uzumaki
+  - Endo
+  - Fukuda
+  - Ota
 --- !u!1 &254367994
 GameObject:
   m_ObjectHideFlags: 0
@@ -6334,7 +6397,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1609066181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 716.1046, y: 0, z: 0}
+  m_LocalPosition: {x: 959.91095, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1729652778}
@@ -6463,8 +6526,8 @@ MonoBehaviour:
   Menu3: {fileID: 0}
   FemaleNumber: {fileID: 0}
   MaleNumber: {fileID: 0}
-  MaleSpawn: 5
-  FemaleSpawn: 5
+  MaleSpawn: 0
+  FemaleSpawn: 0
 --- !u!4 &1691794161
 Transform:
   m_ObjectHideFlags: 0
@@ -6596,8 +6659,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1729652772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 137.5, y: 139, z: 0}
-  m_LocalScale: {x: 0.19201106, y: 0.19201106, z: 0.19201106}
+  m_LocalPosition: {x: 299.5, y: 168.5, z: 0}
+  m_LocalScale: {x: 0.3120081, y: 0.3120081, z: 0.3120081}
   m_Children:
   - {fileID: 1609066184}
   m_Father: {fileID: 0}
