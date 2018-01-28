@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
+    public Texture2D cursorTexture;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+    
 
     Rigidbody RB;
     public float speed;
@@ -10,7 +14,9 @@ public class CameraController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         RB = GetComponent<Rigidbody>();
-	}
+
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+    }
 
     public Vector3 input;
 
