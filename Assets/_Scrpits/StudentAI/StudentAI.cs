@@ -119,28 +119,50 @@ public class StudentAI : MonoBehaviour {
         }
     }
 
+    public GameObject PrefabPop;
+    public float ChatLength;
+    private float SetChatLength;
+    bool enterChat;
     public void DoSocial()
     {
         Agent.SetDestination(SocialTarget.transform.position);
 
-        if (Agent.remainingDistance < 5)
+        if (Agent.remainingDistance < 5 && enterChat == false)
         {
+            enterChat = true;
             PersonTag targetTag = SocialTarget.gameObject.GetComponent<PersonTag>();
             PersonTag tag = GetComponent<PersonTag>();
-            Agent.SetDestination(SocialTarget.transform.position);
+            Agent.SetDestination(transform.position);
 
             //Do conversation here!!!!
-            PairWiseInteraction(tag, targetTag);
-            CurrentState = States.Roam;
+            bool result = PairWiseInteraction(tag, targetTag);
             ChatCooldown = 5;
             //Debug.Log("fuck has occurred");
-        }
-        else if(ChatEngaged == true)
-        {
-            
-        }
 
-        ChatEngaged = false;
+            GameObject NewConvo = Instantiate(PrefabPop, transform.position, Quaternion.identity);
+            ConversationPopup temp = NewConvo.GetComponent<ConversationPopup>();
+
+            temp.Feeling = (result) ? 1 : 0;
+            temp.One = this.gameObject;
+            temp.Two = SocialTarget.gameObject;
+
+            Destroy(NewConvo, ChatLength);
+            SetChatLength = ChatLength;
+            ChatEngaged = false;
+            //Agent.isStopped = true;
+        }
+        if (enterChat == true)
+        {
+            if(SetChatLength <= 0)
+            {
+                enterChat = false;
+               // Agent.isStopped = false;
+                NewDestination();
+                CurrentState = States.Roam;
+            }
+        }
+        SetChatLength -= Time.deltaTime;
+
     }
 
     public bool PairWiseInteraction(PersonTag initiator, PersonTag reciever)
