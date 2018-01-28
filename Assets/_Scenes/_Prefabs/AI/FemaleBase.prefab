@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 54252444280184666}
   - component: {fileID: 195228836892816290}
   - component: {fileID: 114415990127647200}
+  - component: {fileID: 82363194253778548}
   m_Layer: 8
   m_Name: FemaleBase
   m_TagString: Untagged
@@ -596,6 +597,86 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!82 &82363194253778548
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656491068095592}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 551.9
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.047222223
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114269767261635524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -666,6 +747,33 @@ MonoBehaviour:
   CurrentIntent: 0
   WorkTime: 0
   thought: {fileID: 0}
+  Giggles:
+  - {fileID: 8300000, guid: 803a0710ba9f11d42afe1b4c377b3e77, type: 3}
+  - {fileID: 8300000, guid: 7130d8e2f9e1798489313328804d5156, type: 3}
+  - {fileID: 8300000, guid: d56c31a1c17cc1041bbf30d65e019afe, type: 3}
+  - {fileID: 8300000, guid: 1a51534162c17cc4c992ea739902908b, type: 3}
+  - {fileID: 8300000, guid: c9c44fbdca7c64f41b5f1cfa460d6b5e, type: 3}
+  - {fileID: 8300000, guid: 602e8e596440b934e9ffdb5587d43559, type: 3}
+  - {fileID: 8300000, guid: 695dd61b0db03d14388ec0cbb9998811, type: 3}
+  - {fileID: 8300000, guid: 715a23c9b364b434a9879572f1d80b5c, type: 3}
+  - {fileID: 8300000, guid: eecb1768875ac964aba45a31ec4f189f, type: 3}
+  - {fileID: 8300000, guid: d91ff852f1c1b2544975dd6ed83c4ff3, type: 3}
+  - {fileID: 8300000, guid: 93825fefae929fd4480dc4b48b26504d, type: 3}
+  - {fileID: 8300000, guid: be28eb773f196ce40a063ff70cfc3223, type: 3}
+  - {fileID: 8300000, guid: 16872d7f022e22842b52d5f29572862c, type: 3}
+  - {fileID: 8300000, guid: 8b96df359d34db248860785dd33547b2, type: 3}
+  - {fileID: 8300000, guid: 027d78268af88ec45a9a85b91a8dfe19, type: 3}
+  - {fileID: 8300000, guid: aa5be64e84935ab45b10af397f29539e, type: 3}
+  - {fileID: 8300000, guid: a02688893d944c14f9be057ef6f8bd88, type: 3}
+  - {fileID: 8300000, guid: 895ebc1be6c81824389cea3b3d70319d, type: 3}
+  - {fileID: 8300000, guid: 811308270bca655418b232bcf570b6c7, type: 3}
+  - {fileID: 8300000, guid: 67946080ecf89e3408f82b4acc2e86e9, type: 3}
+  - {fileID: 8300000, guid: c762eef053b18cc48a385c1a7bbcdfe6, type: 3}
+  - {fileID: 8300000, guid: e4fb0052ca3faee4fb590778917aad41, type: 3}
+  - {fileID: 8300000, guid: 9ff1c69c086f4084e8244137729219ce, type: 3}
+  - {fileID: 8300000, guid: 5598f776e68f4a84793a3fd20941a0c3, type: 3}
+  - {fileID: 8300000, guid: cc16159fdd3f01147be30d242d075cd6, type: 3}
+  - {fileID: 8300000, guid: fbd001d84bb91a14d83a9ea39e9f538e, type: 3}
   ChillTime: 0
   ChatEngaged: 0
   PrefabPop: {fileID: 1500937760691890, guid: 708088470a3f30b479507d24811b0d53, type: 2}

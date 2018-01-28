@@ -37,6 +37,14 @@ public class StudentAI : MonoBehaviour {
     public bool WorkTime;
 
     public IdleThoughtSystem thought;
+
+    public AudioClip[] Giggles;
+
+    public void playClickSound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(Giggles[Random.Range(0, Giggles.Length - 1)]);
+    }
+
     public Vector3 RandomNavmeshLocation(float radius)
     {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
