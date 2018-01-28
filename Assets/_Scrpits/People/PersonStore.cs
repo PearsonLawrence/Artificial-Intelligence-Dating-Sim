@@ -33,6 +33,7 @@ public class SocialRecord
 [System.Serializable]
 public class Person
 {
+    public string name;
     public CharacterAttributes attributes = new CharacterAttributes();
 }
 

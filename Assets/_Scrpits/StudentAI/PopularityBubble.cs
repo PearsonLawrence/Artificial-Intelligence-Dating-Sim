@@ -25,8 +25,6 @@ public class PopularityBubble : MonoBehaviour {
             Temp.SocialTarget = Owner;
             Owner.ChatEngaged = true;
             Temp.ChatEngaged = true;
-
-            Debug.Log("dido");
         }
     }
 

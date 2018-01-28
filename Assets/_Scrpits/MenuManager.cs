@@ -15,16 +15,14 @@ public class MenuManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-
-        MaleSpawn = MaleNumberAmount;
-        FemaleSpawn = FemaleNumberAmount;
+        MaleSpawn = MaleSpawn > 0 ? MaleSpawn : MaleNumberAmount;
+        FemaleSpawn = FemaleSpawn > 0 ? FemaleSpawn : FemaleNumberAmount;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        MaleSpawn = MaleNumberAmount;
-        FemaleSpawn = FemaleNumberAmount;
+        MaleSpawn = MaleSpawn > 0 ? MaleSpawn : MaleNumberAmount;
+        FemaleSpawn = FemaleSpawn > 0 ? FemaleSpawn : FemaleNumberAmount;
 
     }
     

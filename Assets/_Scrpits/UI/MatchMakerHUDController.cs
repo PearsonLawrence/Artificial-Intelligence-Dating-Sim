@@ -16,7 +16,7 @@ public class MatchMakerHUDController : MonoBehaviour
 			return _picker.pickedObject != null;
 		}
 	}
-	private bool _pickedPerson;
+	private Person _pickedPerson;
 
 	[SerializeField]
 	private GameObject _inspectorPanel;
@@ -35,24 +35,25 @@ public class MatchMakerHUDController : MonoBehaviour
 
 	public void UpdateIDCard()
 	{
-		fullName.text = "John Doe";
-		AggressionField.text = string.Format(AggressionFormat, 0);
-		CharismaField.text = string.Format(CharismaFormat, 0);
-		PopularityField.text = string.Format(PopularityFormat, 0);
+		fullName.text = _pickedPerson.name;
+		AggressionField.text = string.Format(AggressionFormat, _pickedPerson.attributes.aggression);
+		CharismaField.text = string.Format(CharismaFormat, _pickedPerson.attributes.charisma);
+		PopularityField.text = string.Format(PopularityFormat, _pickedPerson.attributes.popularity);
 	}
 
 	private void Update()
 	{
 		bool pickerIsFocused = _pickerFocused;
-		_inspectorPanel.SetActive(pickerIsFocused);
-
 		bool pickerHasChanged = pickerWasFocused != pickerIsFocused;
+
+		_inspectorPanel.SetActive(pickerIsFocused);
 
 		if(pickerIsFocused && pickerHasChanged)
 		{
+			_pickedPerson = Kernal.instance.store.people[_picker.pickedObject.GetComponent<PersonTag>().storeID];
 			UpdateIDCard(); // need to switch to event based later
 		}
 
-		pickerWasFocused = _pickedPerson;
+		pickerWasFocused = _pickerFocused;
 	}
 }

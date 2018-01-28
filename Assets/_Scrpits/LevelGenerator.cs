@@ -11,6 +11,11 @@ public class LevelGenerator : MonoBehaviour {
     public GameObject MalePrefab, FemalePrefab;
 
     public Kernal kernal;
+
+    public List<string> MaleNames;
+    public List<string> FemaleNames;
+    public List<string> FamilyNames;
+
     // Use this for initialization
     void Start ()
     {
@@ -39,6 +44,14 @@ public class LevelGenerator : MonoBehaviour {
         {
             PersonTag tag = (characters[i] as PersonTag);
             Person temp = new Person();
+
+            Gender finalGender = Random.Range(0,2) == 1 ? Gender.Female : Gender.Male;
+
+
+            temp.name = FamilyNames[Random.Range(0, FamilyNames.Count)];
+            temp.name += " " + (finalGender == Gender.Male ? MaleNames[Random.Range(0, MaleNames.Count)] :
+                                                             FemaleNames[Random.Range(0, FemaleNames.Count)]);
+
             temp.attributes.aggression = Random.RandomRange(0, 5);
             temp.attributes.charisma = Random.RandomRange(0, 5);
             temp.attributes.popularity = Random.RandomRange(0, 5);
@@ -48,13 +61,32 @@ public class LevelGenerator : MonoBehaviour {
         }
     }
 
+    public enum Gender
+    {
+        Male,
+        Female,
+        Random
+    } 
+
     int numSpawned = 0;
-    GameObject SpawnPerson(GameObject prefab, Vector3 spawnLocation, Quaternion spawnRotation)
+    GameObject SpawnPerson(GameObject prefab, Vector3 spawnLocation, Quaternion spawnRotation, Gender genderPreference)
     {
         GameObject temp = Instantiate(prefab, RandomNavmeshLocation(12), Quaternion.identity);
         temp.GetComponent<PersonTag>().storeID = numSpawned;
         numSpawned++;
         Person TempPerson = new Person();
+
+        Gender finalGender = genderPreference != Gender.Random ? genderPreference :
+                                        Random.Range(0,2) == 1 ? Gender.Female :
+                                                                 Gender.Male;
+
+
+        TempPerson.name = FamilyNames[Random.Range(0, FamilyNames.Count)];
+        TempPerson.name += " " + (genderPreference == Gender.Male ? MaleNames[Random.Range(0, MaleNames.Count)] :
+                                                                    FemaleNames[Random.Range(0, FemaleNames.Count)]);
+        TempPerson.attributes.aggression = Random.RandomRange(0, 5);
+        TempPerson.attributes.charisma = Random.RandomRange(0, 5);
+        TempPerson.attributes.popularity = Random.RandomRange(0, 5);
 
         kernal.store.people.Add(TempPerson);
         kernal.store.socialRecords.Add(new Dictionary<int, SocialRecord>());
@@ -74,11 +106,11 @@ public class LevelGenerator : MonoBehaviour {
             {
                 if (i < Manager.MaleSpawn)
                 {
-                    SpawnPerson(MalePrefab, RandomNavmeshLocation(12), Quaternion.identity);
+                    SpawnPerson(MalePrefab, RandomNavmeshLocation(12), Quaternion.identity, Gender.Male);
                 }
                 if (i < Manager.FemaleSpawn)
                 {
-                    SpawnPerson(FemalePrefab, RandomNavmeshLocation(12), Quaternion.identity);
+                    SpawnPerson(FemalePrefab, RandomNavmeshLocation(12), Quaternion.identity, Gender.Female);
                 }
             }
             spawn = false;
