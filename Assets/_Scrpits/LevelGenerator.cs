@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.UI;
 public enum Gender
 {
     Male,
@@ -12,6 +12,7 @@ public enum Gender
 } 
 
 public class LevelGenerator : MonoBehaviour {
+    public GameObject[] sprites;
 
     public MenuManager Manager;
 
@@ -87,6 +88,9 @@ public class LevelGenerator : MonoBehaviour {
         TempPerson.name = FamilyNames[Random.Range(0, FamilyNames.Count)];
         TempPerson.name += " " + (genderPreference == Gender.Male ? MaleNames[Random.Range(0, MaleNames.Count)] :
                                                                     FemaleNames[Random.Range(0, FemaleNames.Count)]);
+
+        
+
         TempPerson.attributes.aggression = Random.Range(0, 5);
         TempPerson.attributes.charisma = Random.Range(0, 5);
         TempPerson.attributes.popularity = Random.Range(0, 5);

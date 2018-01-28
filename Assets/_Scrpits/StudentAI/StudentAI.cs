@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 public class StudentAI : MonoBehaviour {
-    
+
+    public GameObject[] Skins;
 
     public enum States
     {
@@ -56,6 +57,12 @@ public class StudentAI : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        int skin = Random.Range(0, Skins.Length - 1);
+        for(int i = 0; i < Skins.Length; i++)
+        {
+            if(i == skin) { Skins[i].SetActive(true); }
+            else { Skins[i].SetActive(false); }
+        }
         RB = GetComponent<Rigidbody>();
         Agent = GetComponent<NavMeshAgent>();
         School = GameObject.FindObjectOfType<SchoolManager>();
@@ -64,6 +71,12 @@ public class StudentAI : MonoBehaviour {
     }
 
     public float ChillTime;
+    public void ForceInteract(StudentAI Target)
+    {
+        SocialTarget = Target;
+        CurrentState = States.Socialize;
+    }
+
     public void DoRoam()
     {
         if (Partner == null)
@@ -251,8 +264,16 @@ public class StudentAI : MonoBehaviour {
                 
                 if(result)
                 {
+                    if(Partner != null)
+                    {
+                        Partner.Partner = null;
+                    }
                     Partner = SocialTarget;
-                    SocialTarget.Partner = this;
+                    if(Partner.Partner != null)
+                    {
+                        Partner.Partner = null;
+                    }
+                    Partner.Partner = this;
                     record.RelationShipStatus = 1;
                     record2.RelationShipStatus = 1;
                     confessed = true;

@@ -13,10 +13,14 @@ public class MenuManager : MonoBehaviour {
 
     public int MaleSpawn, FemaleSpawn;
 
+    public float FadeTime;
+    public bool In, Out;
+    public Image Black;
 	// Use this for initialization
 	void Start () {
         MaleSpawn = MaleNumberAmount;
         FemaleSpawn =  FemaleNumberAmount;
+        In = true;
     }
 	
 	// Update is called once per frame
@@ -24,6 +28,25 @@ public class MenuManager : MonoBehaviour {
         MaleSpawn =  MaleNumberAmount;
         FemaleSpawn =  FemaleNumberAmount;
 
+        if(In)
+        {
+            Black.color -= new Color(0,0,0, Time.deltaTime * FadeTime);
+            Black.color = new Color(Black.color.r, Black.color.g, Black.color.b, Mathf.Clamp(Black.color.a, 0, 255));
+            if(Black.color.a <= 0)
+            {
+                Black.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+
+            Black.color += new Color(0, 0, 0, Time.deltaTime * FadeTime);
+            Black.color = new Color(Black.color.r, Black.color.g, Black.color.b, Mathf.Clamp(Black.color.a, 0, 255));
+            if(Black.color.a >= 1 && load)
+            {
+                SceneManager.LoadScene("Test");
+            }
+        }
     }
     
     public void assignFemale()
@@ -36,10 +59,13 @@ public class MenuManager : MonoBehaviour {
 
         MaleNumberAmount = int.Parse(MaleNumber.text);
     }
-
+    bool load;
     public void OnPlayClick()
     {
-        SceneManager.LoadScene("Test");
+        load = true;
+        In = false;
+
+        Black.gameObject.SetActive(true);
     }
 
     public void OnQuitClick()
