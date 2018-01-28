@@ -68,7 +68,14 @@ public class SocialRecord
 public class Person
 {
     public string name;
+    public Gender gender;
+    public string genderDescriptor; // only applicable if gender is other
     public CharacterAttributes attributes = new CharacterAttributes();
+
+    public StudentAI aiController;
+
+    // oh no
+    // i regret everything
 }
 
 [System.Serializable]

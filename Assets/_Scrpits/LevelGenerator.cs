@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
+public enum Gender
+{
+    Male,
+    Female,
+    Random,
+    Other
+} 
+
 public class LevelGenerator : MonoBehaviour {
 
     public MenuManager Manager;
@@ -55,20 +64,15 @@ public class LevelGenerator : MonoBehaviour {
             temp.attributes.charisma = Random.RandomRange(0, 5);
             temp.attributes.popularity = Random.RandomRange(0, 5);
 
+            temp.aiController = tag.GetComponent<StudentAI>();
+
             kernal.store.people.Add(temp);
             kernal.store.socialRecords.Add(new Dictionary<int, SocialRecord>());
         }
     }
 
-    public enum Gender
-    {
-        Male,
-        Female,
-        Random
-    } 
-
     int numSpawned = 0;
-    GameObject SpawnPerson(GameObject prefab, Vector3 spawnLocation, Quaternion spawnRotation, Gender genderPreference)
+    public GameObject SpawnPerson(GameObject prefab, Vector3 spawnLocation, Quaternion spawnRotation, Gender genderPreference)
     {
         GameObject temp = Instantiate(prefab, RandomNavmeshLocation(12), Quaternion.identity);
         temp.GetComponent<PersonTag>().storeID = numSpawned;
@@ -79,13 +83,15 @@ public class LevelGenerator : MonoBehaviour {
                                         Random.Range(0,2) == 1 ? Gender.Female :
                                                                  Gender.Male;
 
-
+        TempPerson.gender = finalGender;
         TempPerson.name = FamilyNames[Random.Range(0, FamilyNames.Count)];
         TempPerson.name += " " + (genderPreference == Gender.Male ? MaleNames[Random.Range(0, MaleNames.Count)] :
                                                                     FemaleNames[Random.Range(0, FemaleNames.Count)]);
-        TempPerson.attributes.aggression = Random.RandomRange(0, 5);
-        TempPerson.attributes.charisma = Random.RandomRange(0, 5);
-        TempPerson.attributes.popularity = Random.RandomRange(0, 5);
+        TempPerson.attributes.aggression = Random.Range(0, 5);
+        TempPerson.attributes.charisma = Random.Range(0, 5);
+        TempPerson.attributes.popularity = Random.Range(0, 5);
+
+        TempPerson.aiController = temp.GetComponent<StudentAI>();
 
         kernal.store.people.Add(TempPerson);
         kernal.store.socialRecords.Add(new Dictionary<int, SocialRecord>());

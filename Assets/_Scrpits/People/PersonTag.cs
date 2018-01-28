@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PersonTag : MonoBehaviour
 {
-	public int storeID;	
+	public int storeID;
 }
