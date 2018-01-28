@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 195228836892816290}
   - component: {fileID: 114415990127647200}
   - component: {fileID: 82363194253778548}
+  - component: {fileID: 82609054910267718}
   m_Layer: 8
   m_Name: FemaleBase
   m_TagString: Untagged
@@ -608,7 +609,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.268
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -659,6 +660,86 @@ AudioSource:
     - serializedVersion: 2
       time: 0
       value: 0.047222223
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!82 &82609054910267718
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656491068095592}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -774,8 +855,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5598f776e68f4a84793a3fd20941a0c3, type: 3}
   - {fileID: 8300000, guid: cc16159fdd3f01147be30d242d075cd6, type: 3}
   - {fileID: 8300000, guid: fbd001d84bb91a14d83a9ea39e9f538e, type: 3}
+  LoveSource: {fileID: 82680763041769410, guid: 44cce7fa01695264a942609bdec3690b,
+    type: 2}
+  GiggleSource: {fileID: 82413042990566828, guid: 44cce7fa01695264a942609bdec3690b,
+    type: 2}
   ChillTime: 0
   ChatEngaged: 0
+  Victory: {fileID: 8300000, guid: 6b8b8ca362aa0174a9a4756fd4ef21b1, type: 3}
   PrefabPop: {fileID: 1500937760691890, guid: 708088470a3f30b479507d24811b0d53, type: 2}
   ChatLength: 5
   Partner: {fileID: 0}

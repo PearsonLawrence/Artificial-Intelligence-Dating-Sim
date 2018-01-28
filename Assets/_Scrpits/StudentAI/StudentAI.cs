@@ -40,9 +40,11 @@ public class StudentAI : MonoBehaviour {
 
     public AudioClip[] Giggles;
 
+    public AudioSource LoveSource, GiggleSource;
+
     public void playClickSound()
     {
-        GetComponent<AudioSource>().PlayOneShot(Giggles[Random.Range(0, Giggles.Length - 1)]);
+        GiggleSource.PlayOneShot(Giggles[Random.Range(0, Giggles.Length - 1)]);
     }
 
     public Vector3 RandomNavmeshLocation(float radius)
@@ -167,7 +169,7 @@ public class StudentAI : MonoBehaviour {
             //SocialTarget = null;
         }
     }
-
+    public AudioClip Victory;
     public GameObject PrefabPop;
     public float ChatLength;
     private float SetChatLength;
@@ -286,6 +288,9 @@ public class StudentAI : MonoBehaviour {
                     record2.RelationShipStatus = 1;
                     confessed = true;
                     Partner.confessed = false;
+                  
+                        LoveSource.PlayOneShot(Victory, 2);
+                    
                 }
 
                 Destroy(NewConvo, ChatLength);

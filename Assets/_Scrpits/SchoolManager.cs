@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class SchoolManager : MonoBehaviour {
 
     public StudentAI[] Students;
-    
+
+    public AudioSource Audio;
 
     public GameObject GameOverOverlay;
 	// Use this for initialization
