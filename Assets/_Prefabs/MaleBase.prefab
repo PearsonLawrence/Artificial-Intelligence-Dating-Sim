@@ -358,7 +358,9 @@ MonoBehaviour:
   thought: {fileID: 0}
   ChillTime: 0
   ChatEngaged: 0
-  ChatCooldown: 0
+  PrefabPop: {fileID: 1594374734766416, guid: 5222c9b66e117b04cb03e03a151ad82a, type: 2}
+  ChatLength: 5
+  ChatCooldown: 5
 --- !u!135 &135661571423522992
 SphereCollider:
   m_ObjectHideFlags: 1
