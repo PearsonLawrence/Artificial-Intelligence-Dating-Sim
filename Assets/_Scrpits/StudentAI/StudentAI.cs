@@ -44,6 +44,7 @@ public class StudentAI : MonoBehaviour {
 
     public void playClickSound()
     {
+        Random.seed = System.DateTime.Now.Millisecond;
         GiggleSource.PlayOneShot(Giggles[Random.Range(0, Giggles.Length - 1)]);
     }
 
