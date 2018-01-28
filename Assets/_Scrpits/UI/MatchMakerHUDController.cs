@@ -19,6 +19,7 @@ public class MatchMakerHUDController : MonoBehaviour
 	private Person _previousPickedObject;
 
 	private Person _pickedPerson;
+	private int _pickedPersonID;
 
 	[SerializeField]
 	private GameObject _inspectorPanel;
@@ -40,6 +41,10 @@ public class MatchMakerHUDController : MonoBehaviour
 	public string PopularityFormat = "Popularity | {0}";
 	public string MoodFormat = "Mood | {0}";
 
+	[Header("Social")]
+	public RectTransform SocialMediaContentPanel;
+	public GameObject SocialMediaEntryPrefab;
+
 	[Header("Debug")]
 	[SerializeField]
 	private bool alwaysUpdate = true;
@@ -52,6 +57,44 @@ public class MatchMakerHUDController : MonoBehaviour
 		PopularityField.text = string.Format(PopularityFormat, _pickedPerson.attributes.popularity);
 		genderField.text = string.Format(GenderFormat, _pickedPerson.gender.ToString());
 		//MoodFormat.text = string.Format(MoodFormat, _pickedPerson.aiController.mood)
+
+		// social
+		
+		int socialCount = Kernal.instance.store.socialRecords[_pickedPersonID].Count;
+		int childCount = SocialMediaContentPanel.childCount;
+		int childDelta =  socialCount - SocialMediaContentPanel.childCount;
+
+		// need more
+		if(childDelta > 0)
+		{
+			for(int i = 0; i < childDelta; ++i)
+			{
+				GameObject babySocial = Instantiate(SocialMediaEntryPrefab,
+													transform.position,
+													Quaternion.identity,
+													SocialMediaContentPanel);
+				babySocial.transform.SetAsFirstSibling();
+			}
+		}
+		// need less
+		else if (childDelta < 0)
+		{
+			for(int i = childDelta; i < 0; ++i)
+			{
+				SocialMediaContentPanel.GetChild(childCount + i).gameObject.SetActive(false);
+			}
+		}
+
+		int mediaEntry = 0;
+		foreach(var entry in Kernal.instance.store.socialRecords[_pickedPersonID].Keys)
+		{
+			var controller = SocialMediaContentPanel.GetChild(mediaEntry).GetComponent<SocialMediaEntryController>();
+			mediaEntry++;
+			var target = Kernal.instance.store.people[entry];
+
+			controller.nameField.text = target.name;
+			controller.statusField.text = "???";
+		}
 	}
 
 	private void Update()
@@ -63,7 +106,8 @@ public class MatchMakerHUDController : MonoBehaviour
 
 		if(pickerIsFocused && (pickerHasChanged || alwaysUpdate))
 		{
-			_pickedPerson = Kernal.instance.store.people[_picker.pickedObject.GetComponent<PersonTag>().storeID];
+			_pickedPersonID = _picker.pickedObject.GetComponent<PersonTag>().storeID;
+			_pickedPerson = Kernal.instance.store.people[_pickedPersonID];
 			UpdateIDCard(); // need to switch to event based later
 		}
 
