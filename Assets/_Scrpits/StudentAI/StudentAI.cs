@@ -66,20 +66,47 @@ public class StudentAI : MonoBehaviour {
     public float ChillTime;
     public void DoRoam()
     {
-        if (Agent.remainingDistance <= 10)
+        if (Partner == null)
         {
-            CurrentState = States.Chill;
-            NewDestination();
-            ChillTime = Random.Range(0, 10);
 
-            int temp = Random.Range(0, 100);
-            bool think = (temp > 75) ? true : false;
-            if(think)
+
+            if (Agent.remainingDistance <= 10)
             {
-                thought.IdleGrow = true;
+                CurrentState = States.Chill;
+                NewDestination();
+                ChillTime = Random.Range(0, 10);
+
+                int temp = Random.Range(0, 100);
+                bool think = (temp > 75) ? true : false;
+                if (think)
+                {
+                    thought.IdleGrow = true;
+                }
             }
         }
+        else
+        {
+            if(confessed)
+            {
+                if (Agent.remainingDistance <= 10)
+                {
+                    CurrentState = States.Chill;
+                    NewDestination();
+                    ChillTime = Random.Range(0, 10);
 
+                    int temp = Random.Range(0, 100);
+                    bool think = (temp > 75) ? true : false;
+                    if (think)
+                    {
+                        thought.IdleGrow = true;
+                    }
+                }
+            }
+            else
+            {
+                Agent.SetDestination(Partner.transform.position);
+            }
+        }
 
     }
     
@@ -178,6 +205,8 @@ public class StudentAI : MonoBehaviour {
     }
     public StudentAI Partner;
     public ParticleSystem PSLove;
+    public bool confessed;
+
     public void DoConfession()
     {
         Agent.SetDestination(SocialTarget.transform.position);
@@ -226,6 +255,8 @@ public class StudentAI : MonoBehaviour {
                     SocialTarget.Partner = this;
                     record.RelationShipStatus = 1;
                     record2.RelationShipStatus = 1;
+                    confessed = true;
+                    Partner.confessed = false;
                 }
 
                 Destroy(NewConvo, ChatLength);

@@ -44,11 +44,17 @@ public class MenuManager : MonoBehaviour {
 
     public void OnQuitClick()
     {
-
+        Application.Quit();
     }
 
     public void OnEditClick()
     {
-
+        Menu1.SetActive(false);
+        Menu2.SetActive(true);
+    }
+    public void OnBack()
+    {
+        Menu1.SetActive(true);
+        Menu2.SetActive(false);
     }
 }
