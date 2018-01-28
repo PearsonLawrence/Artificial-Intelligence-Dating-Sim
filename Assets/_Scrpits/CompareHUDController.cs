@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class ComparisonData
+{
+	public int id;
+	public Text idNameField;
+	public Text idGenderField;
+	public Slider desireSlider;
+}
+
 public class CompareHUDController : MonoBehaviour
 {
-	[System.Serializable]
-	public class ComparisonData
-	{
-		public int id;
-		public Text idNameField;
-		public Text idGenderField;
-		public Slider desireSlider;
-	}
-
 	public bool[] thingsOpen = new bool[2];
 	public ComparisonData[] thingsToCompare = new ComparisonData[2];
 	public bool isReadyToCompare
