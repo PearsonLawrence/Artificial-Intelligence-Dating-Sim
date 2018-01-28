@@ -61,9 +61,9 @@ public class LevelGenerator : MonoBehaviour {
             temp.name += " " + (finalGender == Gender.Male ? MaleNames[Random.Range(0, MaleNames.Count)] :
                                                              FemaleNames[Random.Range(0, FemaleNames.Count)]);
 
-            temp.attributes.aggression = Random.RandomRange(0, 5);
-            temp.attributes.charisma = Random.RandomRange(0, 5);
-            temp.attributes.popularity = Random.RandomRange(0, 5);
+            temp.attributes.aggression = Random.Range(0, 5);
+            temp.attributes.charisma = Random.Range(0, 5);
+            temp.attributes.popularity = Random.Range(0, 5);
 
             temp.aiController = tag.GetComponent<StudentAI>();
 
@@ -89,13 +89,13 @@ public class LevelGenerator : MonoBehaviour {
         TempPerson.name += " " + (genderPreference == Gender.Male ? MaleNames[Random.Range(0, MaleNames.Count)] :
                                                                     FemaleNames[Random.Range(0, FemaleNames.Count)]);
 
-        
-
         TempPerson.attributes.aggression = Random.Range(0, 5);
         TempPerson.attributes.charisma = Random.Range(0, 5);
         TempPerson.attributes.popularity = Random.Range(0, 5);
 
         TempPerson.aiController = temp.GetComponent<StudentAI>();
+        TempPerson.aiController.GetComponent<NavMeshAgent>().enabled = true;
+        TempPerson.aiController.gameObject.SetActive(true);
 
         kernal.store.people.Add(TempPerson);
         kernal.store.socialRecords.Add(new Dictionary<int, SocialRecord>());

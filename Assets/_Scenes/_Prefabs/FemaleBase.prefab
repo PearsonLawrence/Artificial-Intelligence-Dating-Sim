@@ -379,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a967bca5c863554a967067018d6b774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Skins: []
   sprite: {fileID: 0}
   Target: {x: 0, y: 0, z: 0}
   School: {fileID: 0}
@@ -393,6 +394,7 @@ MonoBehaviour:
   ChatLength: 5
   Partner: {fileID: 0}
   PSLove: {fileID: 198494595792726966}
+  confessed: 0
   ChatCooldown: 5
 --- !u!135 &135012993253965156
 SphereCollider:
@@ -425,7 +427,7 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1668191021323608}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.4
   m_Speed: 3.5
