@@ -1,6 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class GameObjectEvent : UnityEvent<GameObject>
+{
+
+}
 
 public class Picker : MonoBehaviour
 {
@@ -9,6 +16,8 @@ public class Picker : MonoBehaviour
 
 	// Object picked in the last pick (if any)
 	public GameObject pickedObject {get; private set;}
+
+	public GameObjectEvent OnObjectPicked;
 
 	Vector2 cursorPositionScreenSpace
 	{
@@ -38,6 +47,10 @@ public class Picker : MonoBehaviour
 			if(Physics.Raycast(pickerRay, out hit, Mathf.Infinity, pickerMask))
 			{
 				pickedObject = hit.collider.gameObject;
+				if(OnObjectPicked != null)
+				{
+					OnObjectPicked.Invoke(pickedObject);
+				}
 			}
 		}
 	}

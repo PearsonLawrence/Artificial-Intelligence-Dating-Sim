@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class MatchMakerHUDController : MonoBehaviour
 {
 	[SerializeField]
+	private GameObject backingObject;
+
+	[SerializeField]
 	private Picker _picker;
 
 	private bool pickerWasFocused;
@@ -44,6 +47,15 @@ public class MatchMakerHUDController : MonoBehaviour
 	[Header("Social")]
 	public RectTransform SocialMediaContentPanel;
 	public GameObject SocialMediaEntryPrefab;
+
+	public enum InteractionMode
+	{	
+		None,			//
+		Selection,		// select and view a person
+		MultiSelection	// select and explore options between people
+	}
+	[Header("Interaction Mode")]
+	public InteractionMode interactionMode = InteractionMode.Selection;
 
 	[Header("Debug")]
 	[SerializeField]
@@ -102,7 +114,7 @@ public class MatchMakerHUDController : MonoBehaviour
 		bool pickerIsFocused = _pickerFocused;
 		bool pickerHasChanged = (pickerWasFocused != pickerIsFocused);
 
-		_inspectorPanel.SetActive(pickerIsFocused);
+		backingObject.SetActive(pickerIsFocused);
 
 		if(pickerIsFocused && (pickerHasChanged || alwaysUpdate))
 		{
