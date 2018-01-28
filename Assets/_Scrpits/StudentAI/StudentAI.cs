@@ -9,7 +9,8 @@ public class StudentAI : MonoBehaviour {
     {
         Roam,
         Chill,
-        Socialize
+        Socialize,
+        Confess
 
     }
     public enum SocialIntent
@@ -123,30 +124,37 @@ public class StudentAI : MonoBehaviour {
     public float ChatLength;
     private float SetChatLength;
     bool enterChat;
+    bool ChatBoxSpawned;
     public void DoSocial()
     {
         Agent.SetDestination(SocialTarget.transform.position);
 
         if (Agent.remainingDistance < 5 && enterChat == false)
         {
-            enterChat = true;
-            PersonTag targetTag = SocialTarget.gameObject.GetComponent<PersonTag>();
-            PersonTag tag = GetComponent<PersonTag>();
             Agent.SetDestination(transform.position);
 
-            //Do conversation here!!!!
-            bool result = PairWiseInteraction(tag, targetTag);
-            ChatCooldown = 5;
-            //Debug.Log("fuck has occurred");
+            enterChat = true;
+            if (!ChatBoxSpawned && !SocialTarget.ChatBoxSpawned)
+            {
+                ChatBoxSpawned = true;
+                PersonTag targetTag = SocialTarget.gameObject.GetComponent<PersonTag>();
+                PersonTag tag = GetComponent<PersonTag>();
+                
+                //Do conversation here!!!!
+                bool result = PairWiseInteraction(tag, targetTag);
+                ChatCooldown = 5;
+                //Debug.Log("fuck has occurred");
 
-            GameObject NewConvo = Instantiate(PrefabPop, transform.position, Quaternion.identity);
-            ConversationPopup temp = NewConvo.GetComponent<ConversationPopup>();
+                GameObject NewConvo = Instantiate(PrefabPop, transform.position, Quaternion.identity);
+                ConversationPopup temp = NewConvo.GetComponent<ConversationPopup>();
 
-            temp.Feeling = (result) ? 1 : 0;
-            temp.One = this.gameObject;
-            temp.Two = SocialTarget.gameObject;
+                temp.Feeling = (result) ? 1 : 0;
+                temp.One = this.gameObject;
+                temp.Two = SocialTarget.gameObject;
 
-            Destroy(NewConvo, ChatLength);
+                Destroy(NewConvo, ChatLength);
+            }
+
             SetChatLength = ChatLength;
             ChatEngaged = false;
             //Agent.isStopped = true;
@@ -156,7 +164,85 @@ public class StudentAI : MonoBehaviour {
             if(SetChatLength <= 0)
             {
                 enterChat = false;
+                ChatBoxSpawned = false;
                // Agent.isStopped = false;
+                NewDestination();
+                CurrentState = States.Roam;
+            }
+        }
+
+
+
+        SetChatLength -= Time.deltaTime;
+
+    }
+    public StudentAI Partner;
+    public ParticleSystem PSLove;
+    public void DoConfession()
+    {
+        Agent.SetDestination(SocialTarget.transform.position);
+
+        if(PSLove.isPlaying == false)
+        {
+            PSLove.Play();
+
+        }
+
+        if (Agent.remainingDistance < 5 && enterChat == false)
+        {
+            Agent.SetDestination(transform.position);
+
+            enterChat = true;
+            if (!ChatBoxSpawned && !SocialTarget.ChatBoxSpawned)
+            {
+                ChatBoxSpawned = true;
+                PersonTag targetTag = SocialTarget.gameObject.GetComponent<PersonTag>();
+                PersonTag tag = GetComponent<PersonTag>();
+                
+                ChatCooldown = 5;
+                //Debug.Log("fuck has occurred");
+
+                GameObject NewConvo = Instantiate(PrefabPop, transform.position, Quaternion.identity);
+                ConversationPopup temp = NewConvo.GetComponent<ConversationPopup>();
+
+                Person rPerson = Kernal.instance.store.people[SocialTarget.GetComponent<PersonTag>().storeID]; 
+
+                SocialRecord record = null;
+                SocialRecord record2 = null;
+                record = Kernal.instance.store.socialRecords[SocialTarget.GetComponent<PersonTag>().storeID][GetComponent<PersonTag>().storeID];
+                record2 = Kernal.instance.store.socialRecords[GetComponent<PersonTag>().storeID][SocialTarget.GetComponent<PersonTag>().storeID];
+               
+                float AVG = record.desire + record2.desire / 2;
+
+                bool result = (AVG > Random.Range(0, 100)) ? true : false;
+
+                temp.Feeling = (result) ? 2 : 0;
+                temp.One = this.gameObject;
+                temp.Two = SocialTarget.gameObject;
+                
+                if(result)
+                {
+                    Partner = SocialTarget;
+                    SocialTarget.Partner = this;
+                    record.RelationShipStatus = 1;
+                    record2.RelationShipStatus = 1;
+                }
+
+                Destroy(NewConvo, ChatLength);
+            }
+
+            SetChatLength = ChatLength;
+            ChatEngaged = false;
+            //Agent.isStopped = true;
+        }
+        if (enterChat == true)
+        {
+            if (SetChatLength <= 0)
+            {
+                PSLove.Stop();
+                enterChat = false;
+                ChatBoxSpawned = false;
+                // Agent.isStopped = false;
                 NewDestination();
                 CurrentState = States.Roam;
             }
@@ -184,7 +270,7 @@ public class StudentAI : MonoBehaviour {
             Kernal.instance.store.socialRecords[initiator.storeID][reciever.storeID] = new SocialRecord();
         }
         record = Kernal.instance.store.socialRecords[initiator.storeID][reciever.storeID];
-
+        
         // apply
         record.familiarity += multi * 5 * sPerson.attributes.aggression;
         record.trust       += multi * 5 * sPerson.attributes.popularity;
@@ -207,10 +293,18 @@ public class StudentAI : MonoBehaviour {
         record.trust       += multi * 5 * rPerson.attributes.popularity;
         record.eros        += multi * 5 * rPerson.attributes.charisma;
 
+        if(record.desire > 75)
+        {
+            CurrentState = States.Confess;
+            enterChat = false;
+            ChatBoxSpawned = false;
+        }
         //Debug.Log(string.Format("{0}, {1}, {2}", record.familiarity, record.trust, record.eros));
         //Debug.Log(record.desire);
-
-        return roll < chance;
+        bool result = roll < chance;
+        if(result == true) { rPerson.attributes.popularity++;  }
+        else { rPerson.attributes.popularity--; }
+        return result;
     }
 
    
@@ -228,6 +322,9 @@ public class StudentAI : MonoBehaviour {
                 break;
             case States.Socialize:
                 DoSocial();
+                break;
+            case States.Confess:
+                DoConfession();
                 break;
         }
 

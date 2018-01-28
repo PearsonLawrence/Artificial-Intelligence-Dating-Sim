@@ -20,13 +20,47 @@ public class CharacterAttributes
 [System.Serializable]
 public class SocialRecord
 {
+    public int RelationShipStatus; // 0 = single, 1 = Relationship, 3 = questionable, 4 = confessing
+        
+    
+
     public int familiarity;
     public int trust;
     public int eros;
 
-    public int desire
+    public bool DesireOverride;
+
+    public float desire
     {
-        get{ return (familiarity + trust + eros) / 3;}
+        get
+        {
+            float Damp = 0;
+            switch (RelationShipStatus)
+            {
+                case 0:
+                    Damp = 1;
+                    break;
+                case 1:
+                    Damp = .25f;
+                    break;
+                case 2:
+                    Damp = .75f;
+                    break;
+                case 3:
+                    Damp = 1.25f;
+                    break;
+
+            }
+            float FinalDamp = (3 * Damp);
+            if (!DesireOverride)
+            {
+                return (familiarity + trust + eros) / FinalDamp;
+            }
+            else
+            {
+                return 100;
+            }
+        }
     }
 }
 

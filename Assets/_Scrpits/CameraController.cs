@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour {
 
     Rigidbody RB;
     public float speed;
-
+    public float xMin, xMax, yMin, yMax;
 	// Use this for initialization
 	void Start () {
         RB = GetComponent<Rigidbody>();
@@ -23,6 +23,6 @@ public class CameraController : MonoBehaviour {
 	void LateUpdate () {
 
         RB.velocity = input * speed;
-
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, xMin, xMax), transform.position.y, Mathf.Clamp(transform.position.z, yMin, yMax));
 	}
 }
