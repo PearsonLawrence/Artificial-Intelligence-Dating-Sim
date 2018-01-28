@@ -6,10 +6,13 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour {
 
     public GameObject Menu1, Menu2, Menu3;
-    public InputField FemaleNumber, MaleNumber;
-
+    public InputField FemaleNumber, MaleNumber, RoundTime;
+    public Dropdown timeInt;
     public static int MaleNumberAmount;
     public static int FemaleNumberAmount;
+
+    public static int DataType;
+    public static int Timer;
 
     public int MaleSpawn, FemaleSpawn;
 
@@ -67,10 +70,24 @@ public class MenuManager : MonoBehaviour {
 
         Black.gameObject.SetActive(true);
     }
+    public void MMClick()
+    {
 
+        SceneManager.LoadScene("Menu");
+    }
     public void OnQuitClick()
     {
         Application.Quit();
+    }
+
+    public void IntChange()
+    {
+        DataType = timeInt.value;
+    }
+
+    public void Changetime()
+    {
+        Timer = int.Parse(RoundTime.text);
     }
 
     public void OnEditClick()
