@@ -388,6 +388,12 @@ MonoBehaviour:
   CurrentIntent: 0
   WorkTime: 0
   thought: {fileID: 0}
+  Giggles:
+  - {fileID: 8300000, guid: c3dba5c40876ff04eb46ebb95ae13f19, type: 3}
+  - {fileID: 8300000, guid: d82c1f669c4014f4db4737eae6b41907, type: 3}
+  - {fileID: 8300000, guid: 230a6115e019db242b02db0ea2e5519b, type: 3}
+  - {fileID: 8300000, guid: e6a7e01567d12df4ea00f3a8bf62ab18, type: 3}
+  - {fileID: 8300000, guid: 060dd1f46349fa547aa2e17d2941ef1f, type: 3}
   ChillTime: 0
   ChatEngaged: 0
   PrefabPop: {fileID: 1500937760691890, guid: 708088470a3f30b479507d24811b0d53, type: 2}
