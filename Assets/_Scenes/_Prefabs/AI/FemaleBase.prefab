@@ -688,9 +688,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1.73
+  m_PlayOnAwake: 0
+  m_Volume: 0.813
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -855,10 +855,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5598f776e68f4a84793a3fd20941a0c3, type: 3}
   - {fileID: 8300000, guid: cc16159fdd3f01147be30d242d075cd6, type: 3}
   - {fileID: 8300000, guid: fbd001d84bb91a14d83a9ea39e9f538e, type: 3}
-  LoveSource: {fileID: 82680763041769410, guid: 44cce7fa01695264a942609bdec3690b,
-    type: 2}
-  GiggleSource: {fileID: 82413042990566828, guid: 44cce7fa01695264a942609bdec3690b,
-    type: 2}
+  LoveSource: {fileID: 82363194253778548}
+  GiggleSource: {fileID: 82609054910267718}
   ChillTime: 0
   ChatEngaged: 0
   Victory: {fileID: 8300000, guid: 6b8b8ca362aa0174a9a4756fd4ef21b1, type: 3}

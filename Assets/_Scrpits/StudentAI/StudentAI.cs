@@ -68,6 +68,8 @@ public class StudentAI : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        GiggleSource.pitch = 1 * Random.RandomRange(.75F, 1.5F);
+
         int skin = Random.Range(0, Skins.Length - 1);
         for(int i = 0; i < Skins.Length; i++)
         {

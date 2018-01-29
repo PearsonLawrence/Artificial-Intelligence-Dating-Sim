@@ -90,14 +90,23 @@ public class MenuManager : MonoBehaviour {
         Timer = int.Parse(RoundTime.text);
     }
 
+    public void CreditSwitch()
+    {
+        Menu1.SetActive(false);
+        Menu2.SetActive(false);
+        Menu3.SetActive(true);
+    }
+
     public void OnEditClick()
     {
         Menu1.SetActive(false);
+        Menu3.SetActive(false);
         Menu2.SetActive(true);
     }
     public void OnBack()
     {
         Menu1.SetActive(true);
         Menu2.SetActive(false);
+        Menu3.SetActive(false);
     }
 }
